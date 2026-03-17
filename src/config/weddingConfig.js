@@ -22,18 +22,18 @@ export const weddingConfig = {
 
   // RSVP Information
   rsvp: {
-    deadline: "2024-05-15",
+    deadline: "2026-04-15",
     email: "rsvp@johnsonwilliams.com",
     phone: "(555) 123-4567",
     website: "https://johnsonwilliams.rsvp",
-    message: "Please RSVP by May 15th, 2024"
+    message: "Please RSVP by April 15th, 2026"
   },
 
   // Theme and Styling
   theme: {
-    primaryColor: "midnight-blue-600",
-    secondaryColor: "silver-500",
-    accentColor: "midnight-blue-600",
+    primaryColor: "wedding-500",
+    secondaryColor: "wedding-400",
+    accentColor: "wedding-500",
     fontFamily: "serif",
     style: "elegant" // Options: elegant, modern, rustic, vintage
   },

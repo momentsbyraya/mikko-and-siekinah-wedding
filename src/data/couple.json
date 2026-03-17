@@ -1,22 +1,23 @@
 {
   "bride": {
-    "firstName": "Praise Joy",
-    "lastName": "Rita",
-    "fullName": "Praise Joy D. Rita"
+    "firstName": "Siekinah",
+    "lastName": "Taradel",
+    "fullName": "Siekinah M. Taradel"
   },
   "groom": {
-    "firstName": "Gil Carlos",
-    "lastName": "Santiago",
-    "fullName": "Gil Carlos T. Santiago"
+    "firstName": "Mikko",
+    "lastName": "Bucay",
+    "fullName": "Angelo Mikko A. Bucay"
   },
-  "together": "Jon & Sofia",
-  "nickname": "Jon and Sofia",
+  "together": "Mikko & Siekinah",
+  "nickname": "Mikko and Siekinah",
+  "heroDisplay": "Mikko and Sikinah",
   "wedding": {
-    "date": "2026-11-06",
-    "time": "3:30 PM",
-    "dayOfWeek": "Friday",
-    "month": "November",
-    "day": "6",
+    "date": "2026-05-27",
+    "time": "4:00 PM",
+    "dayOfWeek": "Wednesday",
+    "month": "May",
+    "day": "27",
     "year": "2026"
   }
 }

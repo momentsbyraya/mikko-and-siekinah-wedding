@@ -36,56 +36,48 @@ const PhotoUpload = () => {
   }, [])
 
   return (
-    <div className="mt-20 relative">
+    <div className="mt-8 relative">
       <div className="relative overflow-visible">
         <div className="relative overflow-hidden">
           <div 
             ref={photoUploadRef} 
             className="text-center transition-opacity duration-500 ease-in-out"
           >
-            {/* Upload Title */}
-            <div>
+            {/* Upload Title – centered, spacing below */}
+            <div className="upload-title-wrap">
               <h3 className="relative inline-block px-6 upload-title">
-                <span 
-                  className="font-tebranos text-5xl sm:text-6xl md:text-7xl lg:text-8xl inline-block leading-none uppercase upload-title-text"
-                >
+                <span className="font-tebranos text-5xl sm:text-6xl md:text-7xl lg:text-8xl inline-block leading-none uppercase upload-title-text">
                   OH SNAP!
                 </span>
               </h3>
             </div>
 
-            {/* QR Code Image and Details Side by Side */}
-            <div className="flex flex-row lg-custom:flex-col gap-6 md:gap-8 lg-custom:gap-6 items-stretch lg-custom:items-center lg-custom:justify-center">
-              {/* QR Code Image - 50% width on mobile, full width on 992px+ */}
-              <div className="w-1/2 lg-custom:w-full lg-custom:flex lg-custom:justify-center">
-                <div className="w-full relative upload-qr-container" style={{ maxWidth: '350px' }}>
-                  <div className="bg-white p-4 rounded-lg shadow-md w-full h-full flex items-center justify-center">
-                    <img 
-                      src="/assets/images/qr/qr-code.png" 
-                      alt="Upload QR Code" 
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
+            {/* Single white card: QR left, text + link right */}
+            <div className="upload-card">
+              <div className="upload-card-inner">
+                {/* QR Code – left half */}
+                <div className="upload-card-qr">
+                  <img
+                    src="/assets/images/qr/qr-code.png"
+                    alt="Upload QR Code"
+                    className="upload-card-qr-image"
+                  />
                 </div>
-              </div>
-              
-              {/* Upload Details - 50% width on mobile, full width on 992px+ */}
-              <div className="w-1/2 lg-custom:w-full lg-custom:h-fit lg-custom:flex lg-custom:flex-col lg-custom:justify-center lg-custom:items-center flex flex-col justify-between text-left lg-custom:text-center py-4 sm:py-6 upload-content-container">
-                {/* Description */}
-                <p className="text-sm sm:text-base font-albert font-thin text-[#333333] mb-4 text-left lg-custom:text-center">
-                  Share your photos and videos from our special day.
-                </p>
-
-                {/* Upload Button */}
-                <div className="flex justify-start lg-custom:justify-center items-center">
-                  <SecondaryButton
-                    href="https://drive.google.com/drive/folders/1wEU4WKIRjYC0o5t3NlnNiboQUNmH5nN_?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    icon={ArrowRight}
-                  >
-                    Upload Photos
-                  </SecondaryButton>
+                {/* Text and link – right half */}
+                <div className="upload-card-content">
+                  <p className="upload-card-description">
+                    Share your photos and videos from our special day.
+                  </p>
+                  <div className="upload-card-action">
+                    <SecondaryButton
+                      href="https://drive.google.com/drive/folders/1wEU4WKIRjYC0o5t3NlnNiboQUNmH5nN_?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      icon={ArrowRight}
+                    >
+                      Upload Photos
+                    </SecondaryButton>
+                  </div>
                 </div>
               </div>
             </div>

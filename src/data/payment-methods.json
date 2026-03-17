@@ -1,14 +1,34 @@
 {
   "paymentMethods": [
     {
-      "name": "Bank of the Philippine Islands",
-      "image": "/assets/images/monetary-gifts/BPIQR_BPI.png",
+      "name": "BDO",
+      "image": "/assets/images/qr/qr1.png",
       "accountInfo": {
-        "provider": "BPI",
+        "provider": "BDO",
         "accountNumber": "",
         "accountName": "",
-        "qrCode": "/assets/images/monetary-gifts/BPIQR_BPI.png"
+        "qrCode": "/assets/images/qr/qr1.png"
+      }
+    },
+    {
+      "name": "InstaPay",
+      "image": "/assets/images/qr/qr2.png",
+      "accountInfo": {
+        "provider": "InstaPay",
+        "accountNumber": "",
+        "accountName": "",
+        "qrCode": "/assets/images/qr/qr2.png"
+      }
+    },
+    {
+      "name": "GoTyme Bank",
+      "image": "/assets/images/qr/qr3.png",
+      "accountInfo": {
+        "provider": "GoTyme",
+        "accountNumber": "",
+        "accountName": "",
+        "qrCode": "/assets/images/qr/qr3.png"
       }
     }
   ]
-} 
+}

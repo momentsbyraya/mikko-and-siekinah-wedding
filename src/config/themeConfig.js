@@ -1,48 +1,48 @@
 // Theme Configuration - Easy to customize colors
 export const themeConfig = {
-    // Background Colors
+    // Background Colors (Burgundy palette)
     backgrounds: {
         primary: 'bg-gray-900',        // Main dark background
         secondary: 'bg-gray-800',      // Secondary dark background (modals, cards)
-        accent: 'bg-[#800000]',      // Accent background (Maroon)
+        accent: 'bg-[#800020]',        // Accent background (Burgundy)
         light: 'bg-white/50',          // Light overlay backgrounds
         theme: 'bg-[#dee5ed]',        // Custom theme color
         crumpledPaper: 'bg-[url("/assets/images/crumpled-paper.png")] bg-cover bg-center bg-no-repeat', // Crumpled paper background
     },
 
-    // Text Colors
+    // Text Colors (Burgundy palette)
     text: {
-        primary: 'text-[#800000]',     // Main heading text color (Maroon)
+        primary: 'text-[#800020]',     // Main heading text color (Burgundy)
         secondary: 'text-gray-300',    // Subheading and body text color
-        accent: 'text-[#800000]',    // Accent text color (Maroon)
+        accent: 'text-[#800020]',      // Accent text color (Burgundy)
         muted: 'text-gray-400',        // Muted text color (icons, small text)
         dark: 'text-wedding-800',      // Dark text for light backgrounds
-        theme: 'text-[#ad8369]',      // Custom theme text color
+        theme: 'text-[#722F37]',      // Custom theme text color (Dusty burgundy)
         pause: 'text-[#dcdcdc]',      // Pause button text color
         custom: 'text-[#44484d]',     // Custom text color
     },
 
-    // Border Colors
+    // Border Colors (Burgundy palette)
     borders: {
         primary: 'border-gray-700',    // Main border color
         secondary: 'border-gray-600',  // Secondary border color
         accent: 'border-wedding-300',  // Accent border color
-        theme: 'border-[#ad8369]',    // Custom theme border color
+        theme: 'border-[#722F37]',    // Custom theme border color (Dusty burgundy)
     },
 
-    // Button Colors
+    // Button Colors (Burgundy palette)
     buttons: {
-        primary: 'bg-[#800000] hover:bg-[#660000]',  // Primary button (Maroon)
+        primary: 'bg-[#800020] hover:bg-[#600018]',  // Primary button (Burgundy)
         secondary: 'border border-gray-600 hover:border-gray-400', // Secondary button
         text: 'text-gray-300 hover:text-white', // Button text color
-        theme: 'bg-[#ad8369] hover:bg-[#ad8369]/80', // Custom theme button
+        theme: 'bg-[#722F37] hover:bg-[#722F37]/80', // Custom theme button (Dusty burgundy)
     },
 
-    // Hover Effects
+    // Hover Effects (Burgundy palette)
     hover: {
-        primary: 'hover:bg-[#660000]',     // Primary button hover (Dark Maroon)
+        primary: 'hover:bg-[#600018]',     // Primary button hover (Dark Burgundy)
         secondary: 'hover:border-gray-400 hover:text-white', // Secondary button hover
-        theme: 'hover:bg-[#ad8369]/80',     // Custom theme hover
+        theme: 'hover:bg-[#722F37]/80',     // Custom theme hover
     },
 
     // Container Configuration
@@ -52,15 +52,15 @@ export const themeConfig = {
         center: 'mx-auto',
     },
 
-    // Calendar Configuration
+    // Calendar Configuration (Burgundy palette)
     calendar: {
-        weddingDate: '2026-02-22',          // Wedding date (YYYY-MM-DD format)
-        highlightColor: 'bg-[#6c756a]',     // Color for wedding date highlight
-        heartColor: 'text-[#6c756a]',       // Color for heart icon
+        weddingDate: '2026-05-27',          // Wedding date (YYYY-MM-DD format)
+        highlightColor: 'bg-[#7B4B4B]',     // Color for wedding date highlight (Muted burgundy)
+        heartColor: 'text-[#7B4B4B]',      // Color for heart icon
         textColor: 'text-gray-700',         // Calendar text color
         headerColor: 'text-gray-800',       // Month header color
         dayNamesColor: 'text-gray-600',     // Day names color
-        background: 'bg-[#6c756a]',         // Calendar background color
+        background: 'bg-[#7B4B4B]',        // Calendar background color
     },
 
     // Paragraph Configuration
@@ -68,34 +68,34 @@ export const themeConfig = {
         background: 'bg-[#f4f5ef]',         // Paragraph background color
     },
 
-    // Custom CSS Variables (for advanced customization)
+    // Custom CSS Variables (Burgundy palette)
     cssVariables: {
         '--primary-bg': '#111827',           // #111827 (gray-900)
         '--secondary-bg': '#1f2937',        // #1f2937 (gray-800)
-        '--accent-bg': '#800000',           // #800000 (Maroon)
-        '--accent-hover': '#660000',        // #660000 (Dark Maroon Hover)
-        '--primary-text': '#800000',        // #800000 (Maroon)
+        '--accent-bg': '#800020',           // Burgundy
+        '--accent-hover': '#600018',        // Dark Burgundy (Hover)
+        '--primary-text': '#800020',        // Burgundy
         '--secondary-text': '#d1d5db',      // #d1d5db (gray-300)
-        '--accent-text': '#800000',         // #800000 (Maroon)
+        '--accent-text': '#800020',         // Burgundy
         '--muted-text': '#9ca3af',          // #9ca3af (gray-400)
-        '--border-color': '#C0C0C0',        // #C0C0C0 (Silver)
-        '--custom-theme': '#C0C0C0',        // #C0C0C0 (Silver)
+        '--border-color': '#9B7B7B',        // Burgundy-tinted border
+        '--custom-theme': '#722F37',        // Dusty burgundy
     }
 }
 
 // Quick color presets for different themes
 export const themePresets = {
-    // Dark Elegant (Current)
+    // Dark Elegant (Burgundy)
     darkElegant: {
         backgrounds: {
             primary: 'bg-gray-900',
             secondary: 'bg-gray-800',
-            accent: 'bg-[#008080]',
+            accent: 'bg-[#800020]',
         },
         text: {
             primary: 'text-white',
             secondary: 'text-gray-300',
-            accent: 'text-[#008080]',
+            accent: 'text-[#800020]',
         }
     },
 

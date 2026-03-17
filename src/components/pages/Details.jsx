@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MapPin, Clock, ArrowLeft, ArrowRight, ChevronDown, UtensilsCrossed, Palette, Users, Mail, Baby, Car, Camera, Gift, Heart } from 'lucide-react'
@@ -22,6 +22,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Details = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [openFaqIndex, setOpenFaqIndex] = useState(null)
   const [copiedIndex, setCopiedIndex] = useState(null)
   const sectionRef = useRef(null)
@@ -34,6 +35,7 @@ const Details = () => {
   const curvedDivider1Ref = useRef(null)
   const curvedDivider2Ref = useRef(null)
   const curvedDivider3Ref = useRef(null)
+  const photoUploadAnchorRef = useRef(null)
   const faqItems = faqData
 
   // Helper function to get icon and clean text for FAQ questions
@@ -255,6 +257,15 @@ const Details = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (location?.state?.scrollTo === 'photo-upload' && photoUploadAnchorRef.current) {
+      // Give the page a beat to settle (animations/layout)
+      setTimeout(() => {
+        photoUploadAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 300)
+    }
+  }, [location?.state?.scrollTo])
+
   return (
     <>
     <section
@@ -265,7 +276,7 @@ const Details = () => {
     >
       {/* Prenup Image at Top */}
       <ImageBanner 
-        src="/assets/images/prenup/prenup-1.png" 
+        src="/assets/images/prenup/prenup1.jpeg" 
         alt="Prenup photo"
       />
       
@@ -297,7 +308,7 @@ const Details = () => {
         >
           <path 
             d="M0,50 Q300,20 600,50 T1200,50" 
-            stroke="#800000" 
+            stroke="#800020" 
             strokeWidth="2" 
             fill="none"
             opacity="0.4"
@@ -323,7 +334,7 @@ const Details = () => {
         >
           <path 
             d="M0,50 Q300,20 600,50 T1200,50" 
-            stroke="#800000" 
+            stroke="#800020" 
             strokeWidth="2" 
             fill="none"
             opacity="0.4"
@@ -335,9 +346,14 @@ const Details = () => {
       <div ref={photoSectionRef}>
       <PhotoSection
         images={[
-          { src: '/assets/images/prenup/prenup-4.jpg', alt: 'Photo 1', label: 'Memories' },
-          { src: '/assets/images/prenup/prenup-5.jpg', alt: 'Photo 2', label: 'Together' },
-          { src: '/assets/images/prenup/prenup-6.jpg', alt: 'Photo 3', label: 'Love' }
+          { src: '/assets/images/prenup/prenup2.webp', alt: 'Photo 1', label: 'Memories' },
+          { src: '/assets/images/prenup/prenup3.jpeg', alt: 'Photo 2', label: 'Together' },
+          { src: '/assets/images/prenup/prenup4.jpeg', alt: 'Photo 3', label: 'Love' },
+          { src: '/assets/images/prenup/prenup5.jpeg', alt: 'Photo 4', label: 'Joy' },
+          { src: '/assets/images/prenup/prenup6.webp', alt: 'Photo 5', label: 'Laughter' },
+          { src: '/assets/images/prenup/prenup7.webp', alt: 'Photo 6', label: 'Adventure' },
+          { src: '/assets/images/prenup/prenup8.webp', alt: 'Photo 7', label: 'Warmth' },
+          { src: '/assets/images/prenup/prenup9.webp', alt: 'Photo 8', label: 'Us' }
         ]}
         paragraph="This is where our journey began, a moment captured in time that will forever hold a special place in our hearts."
         backgroundTexts={['Forever', 'Always', 'Together', 'Love', 'Us']}
@@ -354,7 +370,7 @@ const Details = () => {
         >
           <path 
             d="M0,50 Q300,20 600,50 T1200,50" 
-            stroke="#800000" 
+            stroke="#800020" 
             strokeWidth="2" 
             fill="none"
             opacity="0.4"
@@ -368,11 +384,31 @@ const Details = () => {
           {/* Dress Code Section */}
           <DressCode />
 
+          {/* Separation line – Dress Code / Gifts */}
+          <div className="content-section-divider" aria-hidden="true">
+            <span className="content-section-divider-line" />
+            <svg className="content-section-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="#800020" stroke="#800020" strokeWidth="2" />
+            </svg>
+            <span className="content-section-divider-line" />
+          </div>
+
           {/* Gift Registry Section */}
           <GiftRegistry />
 
+          {/* Separation line – Gifts / OH SNAP */}
+          <div className="content-section-divider" aria-hidden="true">
+            <span className="content-section-divider-line" />
+            <svg className="content-section-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="#800020" stroke="#800020" strokeWidth="2" />
+            </svg>
+            <span className="content-section-divider-line" />
+          </div>
+
           {/* Photo Upload Section */}
-          <PhotoUpload />
+          <div ref={photoUploadAnchorRef} id="photo-upload">
+            <PhotoUpload />
+          </div>
         </div>
       </div>
 
@@ -439,7 +475,7 @@ const Details = () => {
           navigate('/')
         }
       }}
-      className="fixed bottom-12 right-6 z-[100] w-14 h-14 bg-[#333333] text-white rounded-full shadow-lg hover:bg-[#333333]/80 hover:scale-110 transition-all duration-300 flex items-center justify-center group back-button"
+      className="fixed bottom-12 right-6 z-[100] w-14 h-14 bg-[#800020] text-white rounded-full shadow-lg hover:bg-[#600018] hover:scale-110 transition-all duration-300 flex items-center justify-center group back-button"
       aria-label="Back to home"
     >
       <ArrowLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" />

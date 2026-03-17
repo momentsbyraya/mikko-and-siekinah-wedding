@@ -54,7 +54,7 @@ const DressCode = () => {
   return (
     <div className="relative">
       {/* Dress Code Title */}
-      <div ref={dressCodeTitleRef} className="text-center mb-12 sm:mb-16">
+      <div ref={dressCodeTitleRef} className="text-center mb-6 sm:mb-8">
         <div>
           <h3 className="relative inline-block px-6 py-3">
             <span 

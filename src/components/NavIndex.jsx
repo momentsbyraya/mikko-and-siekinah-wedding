@@ -177,13 +177,13 @@ const NavIndex = ({ onOpenRSVP }) => {
         duration: 0.5,
         ease: "power2.in",
         onComplete: () => {
-          navigate(section.path)
+          navigate(section.path, section.state ? { state: section.state } : undefined)
           // Ensure scroll to top after navigation
           setTimeout(() => window.scrollTo(0, 0), 0)
         }
       })
     } else {
-      navigate(section.path)
+      navigate(section.path, section.state ? { state: section.state } : undefined)
       // Ensure scroll to top after navigation
       setTimeout(() => window.scrollTo(0, 0), 0)
     }
@@ -207,7 +207,7 @@ const NavIndex = ({ onOpenRSVP }) => {
           {/* Midnight Blue Envelope Image */}
         <div ref={envelopeRef} className="flex justify-center relative envelope-container">
           <img 
-            src="/assets/images/graphics/red.png" 
+            src="/assets/images/graphics/for envelopes (7).png" 
             alt="Wedding Invitation" 
             className="w-[60vw] h-auto object-contain"
           />
@@ -250,13 +250,13 @@ const NavIndex = ({ onOpenRSVP }) => {
               <div className="rounded-[50%] w-full h-full flex flex-col items-center justify-center relative oval-border">
                 {/* Text Content */}
                 <div className="text-center px-4">
-                  <p className="nanum-myeongjo-regular text-[#333333] mb-2 oval-text-for">
+                  <p className="nanum-myeongjo-regular text-[#722F37] mb-2 oval-text-for">
                     FOR THE
                   </p>
                   <p className="imperial-script-regular mb-4 underline oval-text-entourage">
                     Entourage
                   </p>
-                  <p className="nanum-myeongjo-regular text-[#333333] oval-text-click">
+                  <p className="nanum-myeongjo-regular text-[#722F37] oval-text-click">
                     CLICK HERE
                   </p>
                 </div>
@@ -301,7 +301,7 @@ const NavIndex = ({ onOpenRSVP }) => {
               className="bg-white relative polaroid-container"
             >
               <img 
-                src="/assets/images/prenup/prenup-5.jpg" 
+                src="/assets/images/prenup/prenup5.jpeg" 
                 alt="Prenup photo" 
                 className="w-full object-cover polaroid-image"
               />
@@ -342,7 +342,7 @@ const NavIndex = ({ onOpenRSVP }) => {
             {/* Prenup Photo - 30% of container height */}
             <div className="w-full overflow-hidden rsvp-photo-container">
               <img 
-                src="/assets/images/prenup/prenup-6.jpg" 
+                src="/assets/images/prenup/prenup6.webp" 
                 alt="Prenup photo" 
                 className="w-full h-full object-cover rsvp-photo"
               />
@@ -393,7 +393,7 @@ const NavIndex = ({ onOpenRSVP }) => {
             
             {/* Text Content */}
             <div className="text-center px-4 relative z-10">
-              <p className="nanum-myeongjo-regular text-[#333333] details-text-view">
+              <p className="nanum-myeongjo-regular text-[#722F37] details-text-view">
                 VIEW THE
               </p>
                 <p className="imperial-script-regular underline details-text-details">
@@ -479,7 +479,7 @@ const NavIndex = ({ onOpenRSVP }) => {
           >
             <div className="bg-white relative polaroid-1-container">
               <img 
-                src="/assets/images/prenup/prenup-7.jpg" 
+                src="/assets/images/prenup/prenup7.webp" 
                 alt="Prenup photo" 
                 className="w-full object-cover polaroid-1-image"
               />
@@ -511,7 +511,7 @@ const NavIndex = ({ onOpenRSVP }) => {
           >
             <div className="bg-white relative polaroid-2-container">
               <img 
-                src="/assets/images/prenup/prenup-4.jpg" 
+                src="/assets/images/prenup/prenup4.jpeg" 
                 alt="Prenup photo" 
                 className="w-full object-cover polaroid-2-image"
               />
@@ -526,64 +526,6 @@ const NavIndex = ({ onOpenRSVP }) => {
           </div>
         </div>
 
-          {/* Navigation Boxes Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-            {sections.map((section) => {
-              const isActive = location.pathname === section.path
-              const isCountdown = section.id === 'counter'
-              
-              // For countdown, render as non-clickable div
-              if (isCountdown) {
-                return (
-                  <div
-                    key={section.id}
-                    className="group relative opacity-70 cursor-default"
-                  >
-                    {/* Box with Section Name */}
-                    <div 
-                      className="px-4 py-6 rounded-lg border-2 text-center min-h-[80px] flex items-center justify-center bg-white border-[#333333]/30 text-[#333333] shadow-sm"
-                    >
-                      <span className="text-sm sm:text-base font-albert font-medium">
-                        {section.name}
-                      </span>
-                    </div>
-                  </div>
-                )
-              }
-              
-              // For other sections, render as clickable button
-              return (
-                <button
-                  key={section.id}
-                  onClick={() => handleNavigation(section)}
-                  className={`group relative transition-all duration-300 ${
-                    isActive 
-                      ? 'opacity-100 scale-105' 
-                      : 'opacity-90 hover:opacity-100 hover:scale-105'
-                  }`}
-                  aria-label={section.isModal ? `Open ${section.name} modal` : `Navigate to ${section.name}`}
-                >
-                  {/* Box with Section Name */}
-                  <div 
-                    className={`px-4 py-6 rounded-lg border-2 transition-all duration-300 text-center min-h-[80px] flex items-center justify-center ${
-                      isActive
-                        ? 'bg-[#333333] border-[#333333] text-white shadow-lg'
-                        : 'bg-white border-[#333333]/40 text-[#333333] hover:border-[#333333]/60 hover:bg-white shadow-md'
-                    }`}
-                  >
-                    <span className="text-sm sm:text-base font-albert font-medium">
-                      {section.name}
-                    </span>
-                  </div>
-                  
-                  {/* Active indicator dot */}
-                  {isActive && (
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#333333] rounded-full border-2 border-white" />
-                  )}
-                </button>
-              )
-            })}
-          </div>
         </div>
 
         {/* Container 3: Counter */}

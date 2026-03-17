@@ -1,25 +1,23 @@
 {
   "ceremony": {
-    "name": "San Agustin Church",
-    "address": "General Luna St",
-    "city": "Intramuros",
-    "state": "Manila",
-    "zip": "1002, Philippines",
-    "time": "3:30 PM",
-    "details": "Schedule: 3:30 PM to 4:30 PM",
-    "googleMapsUrl": "https://maps.app.goo.gl/SanAgustinChurch",
-    "directionsUrl": "https://maps.app.goo.gl/SanAgustinChurch"
+    "name": "Viridis Countryside Garden",
+    "address": "",
+    "city": "Ceremony & Reception",
+    "state": "",
+    "zip": "",
+    "time": "",
+    "details": "Ceremony and reception at one place",
+    "googleMapsUrl": "https://maps.app.goo.gl/qwmeANuoXukG46eK9"
   },
   "reception": {
-    "name": "Villa Escudero Gardens",
-    "address": "San Pablo City", 
-    "city": "Quezon",
-    "state": "Laguna",
-    "zip": "4000, Philippines",
-    "time": "5:00 PM",
-    "details": "Schedule: 5:00 PM to 10:00 PM",
-    "landmark": "Garden Reception",
-    "googleMapsUrl": "https://maps.app.goo.gl/VillaEscudero",
-    "directionsUrl": "https://maps.app.goo.gl/VillaEscudero"
+    "name": "Viridis Countryside Garden",
+    "address": "",
+    "city": "Ceremony & Reception",
+    "state": "",
+    "zip": "",
+    "time": "",
+    "details": "Ceremony and reception at one place",
+    "landmark": "Garden Ceremony & Reception",
+    "googleMapsUrl": "https://maps.app.goo.gl/qwmeANuoXukG46eK9"
   }
-} 
+}

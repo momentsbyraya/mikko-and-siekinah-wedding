@@ -46,48 +46,30 @@ const Moments = () => {
 
   // All prenup images
   const allPrenupImages = [
-    '/assets/images/prenup/prenup-4.jpg',
-    '/assets/images/prenup/prenup-5.jpg',
-    '/assets/images/prenup/prenup-6.jpg',
-    '/assets/images/prenup/prenup-7.jpg',
-    '/assets/images/prenup/prenup-8.jpg',
-    '/assets/images/prenup/prenup-9.jpg',
-    '/assets/images/prenup/prenup-10.jpg',
-    '/assets/images/prenup/prenup-11.jpg'
+    '/assets/images/prenup/prenup2.webp',
+    '/assets/images/prenup/prenup3.jpeg',
+    '/assets/images/prenup/prenup4.jpeg',
+    '/assets/images/prenup/prenup5.jpeg',
+    '/assets/images/prenup/prenup6.webp',
+    '/assets/images/prenup/prenup7.webp',
+    '/assets/images/prenup/prenup8.webp',
+    '/assets/images/prenup/prenup9.webp'
   ]
 
   // Images array for the lightbox (includes all images in same order)
-  const lightboxImages = [
-    '/assets/images/prenup/prenup-4.jpg',
-    '/assets/images/prenup/prenup-5.jpg',
-    '/assets/images/prenup/prenup-6.jpg',
-    '/assets/images/prenup/prenup-7.jpg',
-    '/assets/images/prenup/prenup-8.jpg',
-    '/assets/images/prenup/prenup-9.jpg',
-    '/assets/images/prenup/prenup-10.jpg',
-    '/assets/images/prenup/prenup-11.jpg'
-  ]
+  const lightboxImages = allPrenupImages
 
   // Gallery images for horizontal scroll
-  const galleryImages = [
-    '/assets/images/prenup/prenup-4.jpg',
-    '/assets/images/prenup/prenup-5.jpg',
-    '/assets/images/prenup/prenup-6.jpg',
-    '/assets/images/prenup/prenup-7.jpg',
-    '/assets/images/prenup/prenup-8.jpg',
-    '/assets/images/prenup/prenup-9.jpg',
-    '/assets/images/prenup/prenup-10.jpg',
-    '/assets/images/prenup/prenup-11.jpg'
-  ]
+  const galleryImages = allPrenupImages
 
   // Polaroid images for the scrollable container
   const polaroidImages = [
-    { src: '/assets/images/prenup/P1.jpg', rotation: -5, index: 3 },
-    { src: '/assets/images/prenup/P2.jpg', rotation: 5, index: 4 },
-    { src: '/assets/images/prenup/P3.jpg', rotation: -3, index: 5 },
-    { src: '/assets/images/prenup/P4.jpg', rotation: 3, index: 6 },
-    { src: '/assets/images/prenup/P5.jpg', rotation: -4, index: 7 },
-    { src: '/assets/images/prenup/P6.jpg', rotation: 2, index: 8 }
+    { src: '/assets/images/prenup/prenup10.webp', rotation: -5, index: 3 },
+    { src: '/assets/images/prenup/prenup11.webp', rotation: 5, index: 4 },
+    { src: '/assets/images/prenup/prenup12.webp', rotation: -3, index: 5 },
+    { src: '/assets/images/prenup/prenup13.webp', rotation: 3, index: 6 },
+    { src: '/assets/images/prenup/prenup14.webp', rotation: -4, index: 7 },
+    { src: '/assets/images/prenup/prenup15.webp', rotation: 2, index: 8 }
   ]
 
   useEffect(() => {
@@ -273,6 +255,31 @@ const Moments = () => {
     }
   }, [])
 
+  // Auto-slide gallery row left and right so all photos are shown
+  useEffect(() => {
+    if (!galleryScrollContainerRef.current) return
+
+    const scroller = galleryScrollContainerRef.current
+
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth
+    if (maxScroll <= 0) return
+
+    // Reset to start
+    scroller.scrollLeft = 0
+
+    const tween = gsap.to(scroller, {
+      scrollLeft: maxScroll,
+      duration: 25,
+      ease: 'none',
+      repeat: -1,
+      yoyo: true
+    })
+
+    return () => {
+      tween.kill()
+    }
+  }, [])
+
   // Function to handle video modal open
   const handleVideoOpen = () => {
     // Pause background music when video opens - check actual audio state
@@ -442,7 +449,7 @@ const Moments = () => {
         <div className="relative z-20 w-screen" style={{ width: '100vw' }}>
           <div className="relative w-full h-[250px] sm:h-[250px] md:h-[300px] lg:h-[350px]">
             <img 
-              src="/assets/images/prenup/prenup-3.png" 
+              src="/assets/images/prenup/prenup1.jpeg" 
               alt="Banner image"
               className="w-full h-full object-cover"
             />
@@ -480,7 +487,7 @@ const Moments = () => {
                 </h1>
                 {/* Love Story in Tebranos font */}
                 <h2 className="font-tebranos text-6xl sm:text-7xl md:text-8xl lg:text-9xl uppercase mb-4 -mt-6" style={{ 
-                  color: '#800000'
+                  color: '#800020'
                 }}>
                   Love Story
                 </h2>
@@ -494,7 +501,7 @@ const Moments = () => {
           <div ref={firstParagraphRef} className="relative z-20 w-full max-w-4xl px-8 sm:px-12 md:px-8 lg:px-16">
             <div className="alice-regular font-black text-[#333333] leading-relaxed text-center" style={{ fontWeight: 900, fontSize: '1rem', lineHeight: '1.8' }}>
               <p className="mb-4">
-                They met online—a simple swipe, a message, and just like that, their story began. What started as casual chats and getting to know each other turned into something real. They've laughed together, supported each other through ups and downs, and built something special. Through it all, they've grown closer and stronger, showing that sometimes the best connections happen when you least expect them.
+                Mikko had been the funny church musician since they were kids, while Siekinah was the song leader who somehow always made rehearsals fun. Around 2020, their constant practices and Sunday services turned into inside jokes, late-night chats, and “accidentally” spending more time together. Everyone at church lowkey saw it coming. Four years later, they finally made it official—turns out the real harmony wasn’t just in the music.
               </p>
             </div>
           </div>
@@ -621,14 +628,14 @@ const Moments = () => {
            <div ref={endPhoto4Ref} className="relative z-20 w-screen mt-8">
              <div className="relative">
                <img
-                 src="/assets/images/prenup/prenup-11.jpg"
+                 src="/assets/images/prenup/prenup9.webp"
                  alt="Love story photo"
                  className="w-full h-auto object-cover cursor-pointer"
                  loading="lazy"
                  decoding="async"
                  onClick={() => {
-                   const imageIndex = galleryImages.indexOf('/assets/images/prenup/prenup-11.jpg')
-                   setSelectedImage('/assets/images/prenup/prenup-11.jpg')
+                   const imageIndex = galleryImages.indexOf('/assets/images/prenup/prenup9.webp')
+                   setSelectedImage('/assets/images/prenup/prenup9.webp')
                    setSelectedImageIndex(imageIndex !== -1 ? imageIndex : 0)
                  }}
                />
@@ -646,7 +653,7 @@ const Moments = () => {
                  }}
                >
                  <p 
-                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800000] whitespace-nowrap"
+                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800020] whitespace-nowrap"
                    style={{
                      position: 'absolute',
                      top: '5%',
@@ -657,7 +664,7 @@ const Moments = () => {
                    Forever
                  </p>
                  <p 
-                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800000] whitespace-nowrap"
+                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800020] whitespace-nowrap"
                    style={{
                      position: 'absolute',
                      top: '25%',
@@ -668,7 +675,7 @@ const Moments = () => {
                    Always
                  </p>
                  <p 
-                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800000] whitespace-nowrap"
+                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800020] whitespace-nowrap"
                    style={{
                      position: 'absolute',
                      bottom: '25%',
@@ -679,7 +686,7 @@ const Moments = () => {
                    Together
                  </p>
                  <p 
-                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800000] whitespace-nowrap"
+                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800020] whitespace-nowrap"
                    style={{
                      position: 'absolute',
                      bottom: '5%',
@@ -690,7 +697,7 @@ const Moments = () => {
                    Love
                  </p>
                  <p 
-                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800000] whitespace-nowrap"
+                   className="font-handwritten text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#800020] whitespace-nowrap"
                    style={{
                      position: 'absolute',
                      top: '50%',
@@ -714,14 +721,14 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup-7.jpg)',
+                         backgroundImage: 'url(/assets/images/prenup/prenup4.jpeg)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
                        }}
                      ></div>
                      <div className="p-2 text-center">
-                       <div className="text-sm sm:text-lg text-[#800000] font-handwritten">
+                       <div className="text-sm sm:text-lg text-[#800020] font-handwritten">
                          Memories
                        </div>
                      </div>
@@ -737,14 +744,14 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup-8.jpg)',
+                         backgroundImage: 'url(/assets/images/prenup/prenup5.jpeg)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
                        }}
                      ></div>
                      <div className="p-2 text-center">
-                       <div className="text-sm sm:text-lg text-[#800000] font-handwritten">
+                       <div className="text-sm sm:text-lg text-[#800020] font-handwritten">
                          Together
                        </div>
                      </div>
@@ -760,14 +767,14 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup-9.jpg)',
+                         backgroundImage: 'url(/assets/images/prenup/prenup6.webp)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
                        }}
                      ></div>
                      <div className="p-2 text-center">
-                       <div className="text-sm sm:text-lg text-[#800000] font-handwritten">
+                       <div className="text-sm sm:text-lg text-[#800020] font-handwritten">
                          Love
                        </div>
                      </div>
@@ -785,14 +792,14 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup-10.jpg)',
+                         backgroundImage: 'url(/assets/images/prenup/prenup7.webp)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
                        }}
                      ></div>
                      <div className="p-2 text-center">
-                       <div className="text-sm sm:text-lg text-[#800000] font-handwritten">
+                       <div className="text-sm sm:text-lg text-[#800020] font-handwritten">
                          Forever
                        </div>
                      </div>
@@ -808,14 +815,14 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup-11.jpg)',
+                         backgroundImage: 'url(/assets/images/prenup/prenup8.webp)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
                        }}
                      ></div>
                      <div className="p-2 text-center">
-                       <div className="text-sm sm:text-lg text-[#800000] font-handwritten">
+                       <div className="text-sm sm:text-lg text-[#800020] font-handwritten">
                          Always
                        </div>
                      </div>
@@ -845,7 +852,7 @@ const Moments = () => {
             navigate('/')
           }
         }}
-        className="fixed bottom-12 right-6 z-[100] w-14 h-14 bg-[#333333] text-white rounded-full shadow-lg hover:bg-[#333333]/80 hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-12 right-6 z-[100] w-14 h-14 bg-[#800020] text-white rounded-full shadow-lg hover:bg-[#600018] hover:scale-110 transition-all duration-300 flex items-center justify-center group"
         aria-label="Back to home"
         style={{ pointerEvents: 'auto' }}
       >

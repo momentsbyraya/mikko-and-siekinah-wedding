@@ -8,11 +8,11 @@ const Footer = () => {
 
   return (
     <footer 
-      className="w-full pb-4 transition-colors duration-300 hover:bg-[#013718] active:bg-[#013718] cursor-pointer"
+      className="w-full pb-4 transition-colors duration-300 hover:bg-[#600018] active:bg-[#600018] cursor-pointer"
       onClick={handleFooterClick}
     >
       {/* Divider line on top */}
-      <div className="w-full h-px bg-[#333333] opacity-40 mb-4"></div>
+      <div className="w-full h-px bg-[#800020] opacity-40 mb-4"></div>
       
       {/* Footer text */}
       <div className="text-center">

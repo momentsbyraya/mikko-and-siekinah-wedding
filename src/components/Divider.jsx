@@ -13,8 +13,8 @@ const Divider = () => {
       >
         <path 
           d="M50 10 L90 50 L50 90 L10 50 Z" 
-          fill="#800000" 
-          stroke="#800000" 
+          fill="#800020" 
+          stroke="#800020" 
           strokeWidth="2"
         />
       </svg>

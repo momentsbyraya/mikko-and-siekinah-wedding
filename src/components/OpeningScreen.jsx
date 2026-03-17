@@ -125,7 +125,6 @@ function OpeningScreen({ onEnvelopeOpen }) {
               alt="Cutlery sketch" 
               className="mt-4 w-20 sm:w-24 md:w-28 h-auto mx-auto"
               onError={(e) => {
-                // Use ring-sketch as fallback if cutlery-sketch doesn't exist
                 e.target.src = '/assets/images/graphics/ring-sketch.png'
               }}
             />
@@ -141,7 +140,7 @@ function OpeningScreen({ onEnvelopeOpen }) {
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
             }}
           >
-            {couple.nickname}
+            {couple.heroDisplay || couple.nickname}
           </h2>
           <p 
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-script mt-1"

@@ -89,14 +89,11 @@ const RSVPModal = ({ isOpen, onClose }) => {
         </div>
         
         {/* Content */}
-        <div className="p-6">
-          <div className="w-full h-[600px] overflow-hidden rounded-lg">
-            <iframe
-              src="https://forms.gle/V1hYqW3P9KtUJdsGA"
-              title="RSVP Form"
-              className="w-full h-full border-0"
-              style={{ minHeight: '600px' }}
-            />
+        <div className="p-10">
+          <div className="w-full min-h-[240px] flex items-center justify-center rounded-lg border border-gray-300/60 bg-white/70">
+            <p className="text-center text-lg sm:text-xl font-albert text-gray-900/70">
+              To be added
+            </p>
           </div>
         </div>
       </div>
