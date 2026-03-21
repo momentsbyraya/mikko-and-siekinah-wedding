@@ -5,10 +5,11 @@ const ImageBanner = ({ src, alt = "Banner image" }) => {
   return (
     <div className="relative z-20 w-screen" style={{ width: '100vw' }}>
       <div className="relative w-full h-[250px] sm:h-[250px] md:h-[300px] lg:h-[350px]">
-          <img 
-            src={src} 
-            alt={alt} 
+          <img
+            src={src}
+            alt={alt}
             className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 42%' }}
           />
           {/* Soft transparent white gradient layers at bottom */}
           <GradientLayer height="h-32" opacity={0.7} gradientId="whiteGradient1" />
