@@ -7,12 +7,12 @@ import RSVPModal from './components/RSVPModal'
 import DynamicTitle from './components/DynamicTitle'
 import OpeningScreen from './components/OpeningScreen'
 import Loader from './components/Loader'
-import Watermark from './components/Watermark'
 import ScrollToTop from './components/ScrollToTop'
 import Details from './components/pages/Details'
 import Entourage from './components/pages/Entourage'
 import Moments from './components/pages/Moments'
 import { AudioProvider, useAudio } from './contexts/AudioContext'
+import { navPrenupPreload } from './data/prenupImages'
 
 function AppContent() {
   const [isRSVPModalOpen, setIsRSVPModalOpen] = useState(false)
@@ -25,11 +25,7 @@ function AppContent() {
   useEffect(() => {
     const preloadImages = async () => {
       const criticalImages = [
-        // NavIndex images - all prenup photos used on home page
-        '/assets/images/prenup/prenup5.jpeg',   // Polaroid image
-        '/assets/images/prenup/prenup6.webp',   // RSVP container
-        '/assets/images/prenup/prenup7.webp',   // Moments polaroid 1
-        '/assets/images/prenup/prenup4.jpeg',   // Moments polaroid 2
+        ...navPrenupPreload,
         // NavIndex graphics - all decorative elements
         '/assets/images/graphics/midnight-blue-envelope.png',
         '/assets/images/graphics/flower-1.png',
@@ -132,7 +128,6 @@ function AppContent() {
   return (
     <div className="App min-h-screen wedding-gradient">
       <DynamicTitle />
-      <Watermark />
       <ScrollToTop />
       {/* Loader - shows while preloading */}
       {isLoading && (

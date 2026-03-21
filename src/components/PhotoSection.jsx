@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { prenup } from '../data/prenupImages'
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
@@ -17,12 +18,11 @@ const PhotoSection = ({
   const defaultTexts = ['Forever', 'Always', 'Together', 'Love', 'Us']
   const texts = backgroundTexts.length > 0 ? backgroundTexts : defaultTexts
   
-  // Default images if none provided
-  const defaultImages = [
-    { src: '/assets/images/prenup/prenup3.jpeg', alt: 'Photo 1', label: 'Memories' },
-    { src: '/assets/images/prenup/prenup4.jpeg', alt: 'Photo 2', label: 'Together' },
-    { src: '/assets/images/prenup/prenup5.jpeg', alt: 'Photo 3', label: 'Love' }
-  ]
+  const defaultImages = prenup.detailsStrip.slice(0, 3).map((src, i) => ({
+    src,
+    alt: `Photo ${i + 1}`,
+    label: ['Memories', 'Together', 'Love'][i],
+  }))
 
   const [startIndex, setStartIndex] = useState(0)
 

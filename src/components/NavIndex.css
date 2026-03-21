@@ -26,8 +26,10 @@
   scale: 0;
 }
 
-/* Container with Oval and Polaroid */
+/* Container with Oval and Polaroid — above RSVP row when margins overlap */
 .oval-polaroid-container {
+  position: relative;
+  z-index: 30;
   margin-bottom: 2.5vw;
   margin-top: -27vw;
 }
@@ -115,9 +117,10 @@
   pointer-events: none;
 }
 
-/* RSVP and Details Container */
+/* RSVP and Details — below oval/polaroid stack so Entourage stays in front */
 .rsvp-details-container {
-  z-index: 10;
+  position: relative;
+  z-index: 15;
   margin-bottom: 2.5vw;
   margin-top: -13vw;
   margin-left: 0.83vw;
@@ -134,16 +137,6 @@
   background-repeat: no-repeat;
   transform: rotate(-10deg) translateY(30px);
   opacity: 0;
-}
-
-.rsvp-photo-container {
-  height: 30%;
-  min-height: 15vw;
-}
-
-.rsvp-photo {
-  transform: scale(1.8) translateX(-15%);
-  object-position: left center;
 }
 
 .rsvp-text-kindly {
@@ -201,9 +194,10 @@
   line-height: 0.9;
 }
 
-/* Moments Images Container */
+/* Moments row (polaroids + flower) — below RSVP; decorative flower sits behind cards */
 .moments-images-container {
   margin-top: 2vw;
+  position: relative;
   z-index: 5;
 }
 
@@ -213,21 +207,67 @@
   bottom: -20%;
   left: -10%;
   transform: rotate(-25deg);
-  z-index: 0;
+  z-index: -1;
+}
+
+/* Position-synced overlay for FAQ / Our Moments (see NavIndex useLayoutEffect) */
+.moments-nav-layer {
+  overflow: visible;
+}
+
+/* Positioning context for FAQ + Moments labels (polaroid row) — above polaroid hit areas */
+.moments-text-buttons-anchor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5000;
+  isolation: isolate;
+}
+
+/* FAQs text button — stacked above Our Moments and polaroids; generous hit area */
+.faq-text-button {
+  position: absolute;
+  top: -10.5vw;
+  right: 0;
+  max-width: min(92vw, 20rem);
+  min-width: 10rem;
+  min-height: 2.75rem;
+  padding-right: 6vw;
+  padding-left: 1vw;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  z-index: 5002;
+  pointer-events: auto;
+  user-select: none;
+  cursor: pointer;
+  text-align: right;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  .faq-text-button {
+    top: -3.25rem;
+  }
 }
 
 /* Moments Text Button */
 .moments-text-button {
+  position: absolute;
   top: -6vw;
   right: 0;
   padding-right: 6vw;
   padding-left: 1vw;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
-  z-index: 1000;
+  z-index: 5001;
   pointer-events: auto;
   user-select: none;
   cursor: pointer;
+  text-align: right;
+}
+
+.moments-text-faq {
+  text-underline-offset: 0.2em;
 }
 
 .moments-text {
@@ -255,15 +295,23 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transform: rotate(-5deg);
   z-index: 1;
+  overflow: hidden;
 }
 
+/* Photo only: slight zoom-in (higher = tighter crop) */
 .polaroid-1-image {
   display: block;
   aspect-ratio: 1 / 1;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  object-position: 70% 80%;
+  --p1-scale: 1.08;
+  --p1-focus-x: 70%;
+  --p1-focus-y: 80%;
+  object-fit: cover;
+  object-position: var(--p1-focus-x) var(--p1-focus-y);
+  transform: scale(var(--p1-scale));
+  transform-origin: var(--p1-focus-x) var(--p1-focus-y);
 }
 
 /* Polaroid Image 2 */
@@ -286,13 +334,27 @@
   z-index: 1;
 }
 
+/* Clips scaled photo only; flower stays outside this wrap */
+.polaroid-2-photo-wrap {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Photo only: slight zoom-out + higher focal point for faces (tweak vars) */
 .polaroid-2-image {
   display: block;
   aspect-ratio: 1 / 1;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  object-position: center 85%;
+  --p2-scale: 0.92;
+  --p2-focus-x: 50%;
+  --p2-focus-y: 38%;
+  object-fit: cover;
+  object-position: var(--p2-focus-x) var(--p2-focus-y);
+  transform: scale(var(--p2-scale));
+  transform-origin: var(--p2-focus-x) var(--p2-focus-y);
 }
 
 /* Flower 8 */

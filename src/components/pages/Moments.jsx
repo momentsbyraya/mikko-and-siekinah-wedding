@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, ArrowRight, X, ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import { useAudio } from '../../contexts/AudioContext'
 import GradientLayer from '../GradientLayer'
-import PhotoSection from '../PhotoSection'
+import { prenup, momentsLightboxImages } from '../../data/prenupImages'
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
@@ -44,33 +44,10 @@ const Moments = () => {
   const [startXThreePhotos, setStartXThreePhotos] = useState(0)
   const [scrollLeftThreePhotos, setScrollLeftThreePhotos] = useState(0)
 
-  // All prenup images
-  const allPrenupImages = [
-    '/assets/images/prenup/prenup2.webp',
-    '/assets/images/prenup/prenup3.jpeg',
-    '/assets/images/prenup/prenup4.jpeg',
-    '/assets/images/prenup/prenup5.jpeg',
-    '/assets/images/prenup/prenup6.webp',
-    '/assets/images/prenup/prenup7.webp',
-    '/assets/images/prenup/prenup8.webp',
-    '/assets/images/prenup/prenup9.webp'
-  ]
-
-  // Images array for the lightbox (includes all images in same order)
-  const lightboxImages = allPrenupImages
-
-  // Gallery images for horizontal scroll
-  const galleryImages = allPrenupImages
-
-  // Polaroid images for the scrollable container
-  const polaroidImages = [
-    { src: '/assets/images/prenup/prenup10.webp', rotation: -5, index: 3 },
-    { src: '/assets/images/prenup/prenup11.webp', rotation: 5, index: 4 },
-    { src: '/assets/images/prenup/prenup12.webp', rotation: -3, index: 5 },
-    { src: '/assets/images/prenup/prenup13.webp', rotation: 3, index: 6 },
-    { src: '/assets/images/prenup/prenup14.webp', rotation: -4, index: 7 },
-    { src: '/assets/images/prenup/prenup15.webp', rotation: 2, index: 8 }
-  ]
+  /** Horizontal strip only — each path unique site-wide (see prenupImages.js) */
+  const galleryImages = prenup.momentsGallery
+  /** Strip + closing full-width image (lightbox order) */
+  const lightboxImages = momentsLightboxImages
 
   useEffect(() => {
     // Set initial hidden states to prevent glimpse
@@ -369,19 +346,18 @@ const Moments = () => {
     setSelectedImageIndex(index)
   }
 
-  // Gallery lightbox navigation - uses galleryImages to match gallery order
   const handleGalleryPrevious = () => {
     if (selectedImageIndex !== null && selectedImageIndex > 0) {
       const newIndex = selectedImageIndex - 1
-      setSelectedImage(galleryImages[newIndex])
+      setSelectedImage(lightboxImages[newIndex])
       setSelectedImageIndex(newIndex)
     }
   }
 
   const handleGalleryNext = () => {
-    if (selectedImageIndex !== null && selectedImageIndex < galleryImages.length - 1) {
+    if (selectedImageIndex !== null && selectedImageIndex < lightboxImages.length - 1) {
       const newIndex = selectedImageIndex + 1
-      setSelectedImage(galleryImages[newIndex])
+      setSelectedImage(lightboxImages[newIndex])
       setSelectedImageIndex(newIndex)
     }
   }
@@ -449,7 +425,7 @@ const Moments = () => {
         <div className="relative z-20 w-screen" style={{ width: '100vw' }}>
           <div className="relative w-full h-[250px] sm:h-[250px] md:h-[300px] lg:h-[350px]">
             <img 
-              src="/assets/images/prenup/prenup1.jpeg" 
+              src={prenup.momentsBanner} 
               alt="Banner image"
               className="w-full h-full object-cover"
             />
@@ -628,15 +604,15 @@ const Moments = () => {
            <div ref={endPhoto4Ref} className="relative z-20 w-screen mt-8">
              <div className="relative">
                <img
-                 src="/assets/images/prenup/prenup9.webp"
+                 src={prenup.momentsClosing}
                  alt="Love story photo"
                  className="w-full h-auto object-cover cursor-pointer"
                  loading="lazy"
                  decoding="async"
                  onClick={() => {
-                   const imageIndex = galleryImages.indexOf('/assets/images/prenup/prenup9.webp')
-                   setSelectedImage('/assets/images/prenup/prenup9.webp')
-                   setSelectedImageIndex(imageIndex !== -1 ? imageIndex : 0)
+                   const idx = lightboxImages.indexOf(prenup.momentsClosing)
+                   setSelectedImage(prenup.momentsClosing)
+                   setSelectedImageIndex(idx !== -1 ? idx : lightboxImages.length - 1)
                  }}
                />
              </div>
@@ -721,7 +697,7 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup4.jpeg)',
+                         backgroundImage: 'url(/assets/images/graphics/bg-3.png)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
@@ -744,7 +720,7 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup5.jpeg)',
+                         backgroundImage: 'url(/assets/images/graphics/bg-3.png)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
@@ -767,7 +743,7 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup6.webp)',
+                         backgroundImage: 'url(/assets/images/graphics/bg-3.png)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
@@ -792,7 +768,7 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup7.webp)',
+                         backgroundImage: 'url(/assets/images/graphics/bg-3.png)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
@@ -815,7 +791,7 @@ const Moments = () => {
                      <div 
                        className="w-full h-40 sm:h-60 lg:h-72 bg-cover bg-center"
                        style={{
-                         backgroundImage: 'url(/assets/images/prenup/prenup8.webp)',
+                         backgroundImage: 'url(/assets/images/graphics/bg-3.png)',
                          borderTop: '4px solid white',
                          borderLeft: '4px solid white',
                          borderRight: '4px solid white'
@@ -939,7 +915,7 @@ const Moments = () => {
           )}
 
           {/* Next Button - Right */}
-          {selectedImageIndex !== null && selectedImageIndex < galleryImages.length - 1 && (
+          {selectedImageIndex !== null && selectedImageIndex < lightboxImages.length - 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation()

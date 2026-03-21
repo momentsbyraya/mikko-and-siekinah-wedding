@@ -8,6 +8,8 @@ import './pages/Details.css'
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
 
+const UPLOAD_QR_SRC = '/assets/images/qr/QR - Mikko and Siekinah.png'
+
 const PhotoUpload = () => {
   const photoUploadRef = useRef(null)
 
@@ -58,8 +60,8 @@ const PhotoUpload = () => {
                 {/* QR Code – left half */}
                 <div className="upload-card-qr">
                   <img
-                    src="/assets/images/qr/qr-code.png"
-                    alt="Upload QR Code"
+                    src={encodeURI(UPLOAD_QR_SRC)}
+                    alt="QR code to upload photos — Mikko and Siekinah"
                     className="upload-card-qr-image"
                   />
                 </div>
@@ -70,7 +72,7 @@ const PhotoUpload = () => {
                   </p>
                   <div className="upload-card-action">
                     <SecondaryButton
-                      href="https://drive.google.com/drive/folders/1wEU4WKIRjYC0o5t3NlnNiboQUNmH5nN_?usp=sharing"
+                      href="https://drive.google.com/drive/folders/1DfvaoghTurosZsoCh4Wr178Ptw-_-GP5?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       icon={ArrowRight}

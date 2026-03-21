@@ -78,18 +78,18 @@ const DressCode = () => {
             {/* Section Image */}
             <div className="flex-shrink-0 dress-code-image-container">
               <img 
-                src="/assets/images/dresscode/dress.png" 
-                alt="Dress Code" 
+                src="/assets/images/dresscode/sponsors.png" 
+                alt="Formal dress code — burgundy attire illustration" 
                 className="w-full h-auto object-contain dress-code-image"
               />
             </div>
             
-            {/* Color Palette - Burgundy Red and Black */}
+            {/* Color Palette - burgundy tones */}
             {(() => {
               const dressCodeColors = [
                 { name: "Burgundy Red", hex: "#800020" },
-                { name: "Black", hex: "#000000" },
-                { name: "Dark Burgundy", hex: "#722F37" }
+                { name: "Dark Burgundy", hex: "#722F37" },
+                { name: "Brown Red", hex: "#8E3B3A" },
               ];
               return (
                 <div className="flex flex-col items-center justify-center flex-shrink-0">

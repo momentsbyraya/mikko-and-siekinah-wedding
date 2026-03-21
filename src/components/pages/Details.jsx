@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MapPin, Clock, ArrowLeft, ArrowRight, ChevronDown, UtensilsCrossed, Palette, Users, Mail, Baby, Car, Camera, Gift, Heart } from 'lucide-react'
 import { themeConfig } from '../../config/themeConfig'
 import { faq as faqData } from '../../data'
+import { prenup } from '../../data/prenupImages'
 import ImageBanner from '../ImageBanner'
 import Divider from '../Divider'
 import Line from '../Line'
@@ -20,9 +21,20 @@ import './Details.css'
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
 
+const DETAILS_PHOTO_LABELS = ['Memories', 'Together', 'Love', 'Joy', 'Laughter', 'Adventure']
+
 const Details = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const detailsPhotoSectionImages = useMemo(
+    () =>
+      prenup.detailsStrip.map((src, i) => ({
+        src,
+        alt: `Photo ${i + 1}`,
+        label: DETAILS_PHOTO_LABELS[i] ?? `Photo ${i + 1}`,
+      })),
+    []
+  )
   const [openFaqIndex, setOpenFaqIndex] = useState(null)
   const [copiedIndex, setCopiedIndex] = useState(null)
   const sectionRef = useRef(null)
@@ -258,13 +270,54 @@ const Details = () => {
   }, [])
 
   useEffect(() => {
-    if (location?.state?.scrollTo === 'photo-upload' && photoUploadAnchorRef.current) {
-      // Give the page a beat to settle (animations/layout)
-      setTimeout(() => {
-        photoUploadAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 300)
+    let scrollTo = location.state?.scrollTo
+    if (!scrollTo) {
+      try {
+        scrollTo = sessionStorage.getItem('detailsScrollTo') || undefined
+      } catch {
+        /* ignore */
+      }
     }
-  }, [location?.state?.scrollTo])
+    if (scrollTo === 'faq' || scrollTo === 'photo-upload') {
+      try {
+        sessionStorage.removeItem('detailsScrollTo')
+      } catch {
+        /* ignore */
+      }
+    }
+
+    const scrollElToWindowTop = (el, offset = 16) => {
+      if (!el) return
+      const y = el.getBoundingClientRect().top + window.scrollY - offset
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' })
+    }
+
+    if (scrollTo === 'photo-upload' && photoUploadAnchorRef.current) {
+      const t = setTimeout(() => {
+        scrollElToWindowTop(photoUploadAnchorRef.current, 16)
+      }, 700)
+      return () => clearTimeout(t)
+    }
+
+    if (scrollTo === 'faq') {
+      const scrollFaqIntoView = () => {
+        const el = faqRef.current || document.getElementById('faq')
+        scrollElToWindowTop(el, 16)
+      }
+      // Wait for Details section GSAP slide-in (~0.6s) + layout; repeat so it sticks after paint
+      const t1 = setTimeout(scrollFaqIntoView, 750)
+      const t2 = setTimeout(scrollFaqIntoView, 1200)
+      const t3 = setTimeout(scrollFaqIntoView, 1800)
+      return () => {
+        clearTimeout(t1)
+        clearTimeout(t2)
+        clearTimeout(t3)
+      }
+    }
+
+    return undefined
+    // location.key ensures this runs on every navigation (state object identity can be flaky)
+  }, [location.key, location.state?.scrollTo])
 
   return (
     <>
@@ -276,7 +329,7 @@ const Details = () => {
     >
       {/* Prenup Image at Top */}
       <ImageBanner 
-        src="/assets/images/prenup/prenup1.jpeg" 
+        src={prenup.detailsBanner} 
         alt="Prenup photo"
       />
       
@@ -345,16 +398,7 @@ const Details = () => {
       {/* Photo Section */}
       <div ref={photoSectionRef}>
       <PhotoSection
-        images={[
-          { src: '/assets/images/prenup/prenup2.webp', alt: 'Photo 1', label: 'Memories' },
-          { src: '/assets/images/prenup/prenup3.jpeg', alt: 'Photo 2', label: 'Together' },
-          { src: '/assets/images/prenup/prenup4.jpeg', alt: 'Photo 3', label: 'Love' },
-          { src: '/assets/images/prenup/prenup5.jpeg', alt: 'Photo 4', label: 'Joy' },
-          { src: '/assets/images/prenup/prenup6.webp', alt: 'Photo 5', label: 'Laughter' },
-          { src: '/assets/images/prenup/prenup7.webp', alt: 'Photo 6', label: 'Adventure' },
-          { src: '/assets/images/prenup/prenup8.webp', alt: 'Photo 7', label: 'Warmth' },
-          { src: '/assets/images/prenup/prenup9.webp', alt: 'Photo 8', label: 'Us' }
-        ]}
+        images={detailsPhotoSectionImages}
         paragraph="This is where our journey began, a moment captured in time that will forever hold a special place in our hearts."
         backgroundTexts={['Forever', 'Always', 'Together', 'Love', 'Us']}
       />
@@ -414,7 +458,7 @@ const Details = () => {
 
       {/* FAQ Section - Outside container */}
       <div className="relative z-20 mt-20 faq-section">
-        <div ref={faqRef} className="relative z-10 w-full px-8 sm:px-12 md:px-8 lg:px-16">
+        <div id="faq" ref={faqRef} className="relative z-10 w-full px-8 sm:px-12 md:px-8 lg:px-16">
           <h3 ref={faqTitleRef} className="relative inline-block px-6 py-3 mb-12 text-center w-full">
             <span 
               className="font-tebranos text-5xl sm:text-6xl md:text-7xl lg:text-8xl inline-block leading-none uppercase faq-title-text"

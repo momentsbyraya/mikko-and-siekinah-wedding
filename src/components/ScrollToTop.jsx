@@ -2,11 +2,15 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation()
+  const { pathname, state } = useLocation()
 
   useEffect(() => {
+    const scrollTo = state?.scrollTo
+    if (pathname === '/details' && (scrollTo === 'faq' || scrollTo === 'photo-upload')) {
+      return
+    }
     window.scrollTo(0, 0)
-  }, [pathname])
+  }, [pathname, state?.scrollTo])
 
   return null
 }
