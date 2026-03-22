@@ -1,15 +1,36 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, X } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const ENTOURAGE_IMG_2 = '/assets/images/entourage/2.png'
+const ENTOURAGE_IMG_3 = '/assets/images/entourage/3.png'
 
 const Entourage = () => {
   const navigate = useNavigate()
   const sectionRef = useRef(null)
   const backButtonRef = useRef(null)
+  const [zoomSrc, setZoomSrc] = useState(null)
+
+  const closeZoom = useCallback(() => setZoomSrc(null), [])
+
+  useEffect(() => {
+    if (!zoomSrc) return undefined
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeZoom()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [zoomSrc, closeZoom])
 
   useEffect(() => {
     // Set initial hidden states to prevent glimpse
@@ -113,10 +134,19 @@ const Entourage = () => {
         />
         {/* Entourage – Officiant, Parents of the Groom & Bride, Principal Sponsors */}
         <img
-          src="/assets/images/entourage/2.png"
+          src={ENTOURAGE_IMG_2}
           alt="The Entourage – Officiant, Parents of the Groom & Bride, Principal Sponsors"
-          className="w-full h-auto object-contain object-center block"
+          className="w-full h-auto object-contain object-center block cursor-zoom-in"
           style={{ opacity: 0 }}
+          role="button"
+          tabIndex={0}
+          onClick={() => setZoomSrc(ENTOURAGE_IMG_2)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              setZoomSrc(ENTOURAGE_IMG_2)
+            }
+          }}
         />
         {/* Line-1 Image - Bottom */}
         <img 
@@ -133,10 +163,19 @@ const Entourage = () => {
         />
         {/* Entourage – Best Man, Groomsmen, Maid of Honor, Bridesmaids, Flower Girls, Bearers */}
         <img
-          src="/assets/images/entourage/3.png"
+          src={ENTOURAGE_IMG_3}
           alt="The Entourage – Best Man, Groomsmen, Maid of Honor, Bridesmaids, Flower Girls, Bearers"
-          className="w-full h-auto object-contain object-center block"
+          className="w-full h-auto object-contain object-center block cursor-zoom-in"
           style={{ opacity: 0 }}
+          role="button"
+          tabIndex={0}
+          onClick={() => setZoomSrc(ENTOURAGE_IMG_3)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              setZoomSrc(ENTOURAGE_IMG_3)
+            }
+          }}
         />
         {/* Content - beige overlay (no extra padding) */}
         <div
@@ -158,6 +197,36 @@ const Entourage = () => {
       </section>
       
       {/* Back Button - Circular, Bottom Right - Outside section to avoid transform issues */}
+      {zoomSrc &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[220] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Enlarged entourage image"
+            onClick={closeZoom}
+          >
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                closeZoom()
+              }}
+              className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition-colors"
+              aria-label="Close zoom"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <img
+              src={zoomSrc}
+              alt=""
+              className="max-h-[92vh] max-w-full w-auto h-auto object-contain cursor-default shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body
+        )}
+
       <button
         ref={backButtonRef}
         onClick={() => {
